@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -16,7 +15,7 @@ import org.apache.poi.ss.usermodel.Cell;
 
 
 public class reading {
-	public static String TESTDATA_SHEET_PATH = System.getProperty("user.dir")+"\\InputData.xlsx";
+	public static String TESTDATA_SHEET_PATH = System.getProperty("user.dir")+"\\InputData - Copy.xlsx";
 	static Workbook book;
 	static Sheet sheet;
 	static Row row;
@@ -51,7 +50,13 @@ public class reading {
 			}
 		}
 		
-		sheet.getRow(0).createCell(3).setCellValue("Pass");
+		//sheet.getRow(0).createCell(3).setCellValue("Pass");
+		
+		for (int i = 0; i < sheet.getLastRowNum(); i++) {
+			for (int k = 0; k < sheet.getRow(0).getLastCellNum(); k++) {
+				sheet.getRow(i+1).createCell(3).setCellValue("Pass");
+			}
+		}
 		
 		try {
 			fout =new FileOutputStream(TESTDATA_SHEET_PATH);
